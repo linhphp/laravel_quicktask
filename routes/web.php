@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('tasks', 'TaskController')->except([
+    'show'
+]);
+
+Route::group(['middleware' => 'locale'], function() {
+    Route::get('change-language/{language}', 'TaskController@changeLanguage')
+        ->name('changeLanguage');
+});
